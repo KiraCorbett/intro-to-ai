@@ -5,6 +5,7 @@ import OpenAI from "openai";
 const AdComponent = () => {
     const [userInput, setUserInput] = useState('');
     const [response, setResponse] = useState('');
+    const [typing, setTyping] = useState(false);
     
     const apiKey = '';
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
@@ -33,18 +34,22 @@ const AdComponent = () => {
     };
 
     const generateResponse = async () => {
+      setTyping(true);
 
-            axios.post(apiUrl, data, config)
-            .then(response => {
-              response.data.choices.forEach(choice => {
-                console.log(choice.message.content); // comment out later
-                setResponse(choice.message.content);
-              })
-            })
-            .catch(error => {
-                console.error('Error generating response', error);
-            });
-        }
+      axios.post(apiUrl, data, config)
+      .then(response => {
+        response.data.choices.forEach(choice => {
+          console.log(choice.message.content); // comment out later
+          setResponse(choice.message.content);
+        })
+      })
+      .catch(error => {
+          console.error('Error generating response', error);
+      })
+      .finally(() => {
+        setTyping(false);
+      });
+  }
 
     return (
         <div>
@@ -55,6 +60,7 @@ const AdComponent = () => {
                 placeholder="Enter your prompt here"
             />
             <button onClick={generateResponse}>Generate Response</button>
+            {typing && <p>Typing...</p>}
             {response && (
                 <div>
                     <h3>Generated Response:</h3>
