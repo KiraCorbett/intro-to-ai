@@ -7,4 +7,10 @@ We will:
 * Create a text prompt based model
 
 ## To Get Started
-You can either follow along our tutorial or clone this project directory. 
+`git clone https://github.com/KiraCorbett/intro-to-ai.git`
+
+Then run `npm install`
+
+Enter your OepnAPI keys in `AdComponent.js` to test. There are two spots with comments to fill in.
+
+To start the app, `npm start`
