@@ -1,0 +1,51 @@
+.ad-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.ad-title {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.ad-textarea {
+    width: 90%;
+    height: 100px;
+    padding: 10px;
+    margin-right: 50px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.ad-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ad-button:hover {
+    background-color: #0056b3;
+}
+
+.ad-response {
+    margin-top: 20px;
+}
+
+.ad-response h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.ad-response p {
+    font-size: 16px;
+    color: #666;
+}

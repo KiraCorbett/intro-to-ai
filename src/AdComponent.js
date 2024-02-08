@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import OpenAI from "openai";
+import './AdComponent.css';
 
 const AdComponent = () => {
     const [userInput, setUserInput] = useState('');
     const [response, setResponse] = useState('');
     const [typing, setTyping] = useState(false);
     
-    const apiKey = '';
+    const apiKey = ''; // Your API key here
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
     
     const handleUserInput = (e) => {
@@ -15,7 +16,7 @@ const AdComponent = () => {
     };
 
     const openai = new OpenAI({
-        apiKey: '', // API key here
+        apiKey: '', // Your API key here
         dangerouslyAllowBrowser: true
     });
 
@@ -29,7 +30,6 @@ const AdComponent = () => {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${apiKey}`,
-            'Organization': '',
         },
     };
 
@@ -52,18 +52,19 @@ const AdComponent = () => {
   }
 
     return (
-        <div>
-            <h1>Moon Highway Ad Generator</h1>
+        <div className="ad-container">
+            <h1 className="ad-title">Moon Highway Ad Generator</h1>
             <textarea
+                className="ad-textarea"
                 value={userInput}
                 onChange={handleUserInput}
                 placeholder="Enter your prompt here"
             />
-            <button onClick={generateResponse}>Generate Response</button>
+            <button className="ad-button"onClick={generateResponse}>Generate Response</button>
             {typing && <p>Typing...</p>}
             {response && (
                 <div>
-                    <h3>Generated Response:</h3>
+                    <h3>Generated Ad:</h3>
                     <p>{response}</p>
                 </div>
             )}
