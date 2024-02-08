@@ -1,54 +1,54 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import OpenAI from 'openai';
+import OpenAI from "openai";
 
 const AdComponent = () => {
     const [userInput, setUserInput] = useState('');
     const [response, setResponse] = useState('');
-
+    
+    const apiKey = '';
+    const apiUrl = 'https://api.openai.com/v1/chat/completions';
+    
     const handleUserInput = (e) => {
         setUserInput(e.target.value);
     };
 
     const openai = new OpenAI({
-        apiKey: "", // API key here
+        apiKey: '', // API key here
         dangerouslyAllowBrowser: true
     });
 
-    async function main() {
-        const chatCompletion = await openai.chat.completions.create({
-            messages: [{ role: 'user', content: 'Say this is a test' }],
-            model: 'gpt-3.5-turbo',
-        });
-    }
+    const data = {
+        max_tokens: 50, // Adjust as needed
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: userInput }]
+    };
 
-    main();
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`,
+            'Organization': '',
+        },
+    };
 
     const generateResponse = async () => {
-        try {
-            const apiKey = process.env.OPENAI_API_KEY // Replace with your OpenAI API key
-            const apiUrl = 'https://api.openai.com/v1/completions';
-            const prompt = userInput;
 
-            const { data } = await axios.post(apiUrl, {
-                prompt,
-                max_tokens: 50, // Adjust as needed
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`,
-                },
+            axios.post(apiUrl, data, config)
+            .then(response => {
+              response.data.choices.forEach(choice => {
+                console.log(choice.message.content); // comment out later
+                setResponse(choice.message.content);
+              })
+            })
+            .catch(error => {
+                console.error('Error generating response', error);
             });
-
-            setResponse(data.choices[0].text);
-        } catch (error) {
-            console.error('Error generating response:', error);
         }
-    };
 
     return (
         <div>
-            <h1>OpenAI React App</h1>
+            <h1>Moon Highway Ad Generator</h1>
             <textarea
                 value={userInput}
                 onChange={handleUserInput}
@@ -63,6 +63,6 @@ const AdComponent = () => {
             )}
         </div>
     );
-};
+  }
 
 export default AdComponent;

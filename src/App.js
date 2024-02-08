@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import './AdComponent';
 import AdComponent from './AdComponent';
 
 function App() {
